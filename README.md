@@ -3,7 +3,7 @@
 <h1 align="center">Hi 👋, I'm Carlos Aguirre</h1>
 <h3 align="center">A passionate frontend developer from Argentina</h3>
 
-- 🔭 I’m currently working on **Cursos Online**
+- 🔭 I’m currently working how **Professor of Computing**
 
 - 📫 How to reach me **carlosanibal815@gmail.com**
 

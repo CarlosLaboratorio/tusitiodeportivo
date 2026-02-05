@@ -2,17 +2,16 @@ let cardArticles = JSON.parse(localStorage.getItem("cardArticles")) || []
 const cardCarrito = document.getElementById("card-carrito")
 const totalCarrito = document.getElementById("totalCarrito")
 
-
-// let cardStorage = localStorage.getItem("cardArticles")
 // //mejorar para mantener el carrito actualizado al quitar un artículo.
-// let cardArticles = JSON.parse(cardStorage) || []
-
-
-// let cardCarrito = document.getElementById("card-carrito")
-
 
 function renderizarCarrito(cardItems) {
     cardCarrito.innerHTML = ""
+
+    if (cardItems.length === 0) {
+        cardCarrito.innerHTML = "<p class='text-center'>El carrito está vacío</p>"
+        totalCarrito.innerHTML = "<p class='text-center'>Total: $0</p>"
+        return
+    }
 
     const row = document.createElement("div")
     row.className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4"

@@ -1,0 +1,242 @@
+@charset "UTF-8";
+/* =================== VARIABLES ================== */
+/* =================== MIXIN PARA SOMBRAS ================== */
+/* =================== EXTEND PARA TARJETAS CON SOMBRA ================== */
+.mimapa, .destacado {
+  box-shadow: 0px 4px 30px rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+/* =================== ESTILOS GENERALES ================== */
+* {
+  color: #FFF9AF;
+  font-family: "Fjalla One", sans-serif;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =================== ENCABEZADO ================== */
+header {
+  background-image: url("../media/BAnner-Programador-Moderno.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #154D71;
+  padding: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .logo {
+  margin-left: 50px;
+  width: 130px;
+}
+header nav ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin-right: 500px;
+}
+header nav li {
+  margin-left: 40px;
+}
+header nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-style: italic;
+  text-decoration: none;
+  color: white;
+}
+
+/* =================== SECCIONES ================== */
+.lateral {
+  width: 25%;
+  background-color: rgb(2, 109, 73);
+}
+
+.main-content {
+  width: 75%;
+  background-color: #154D71;
+}
+
+.destacado {
+  width: 70%;
+  height: auto;
+  margin: 20px 25px;
+}
+
+.textblack {
+  color: #154D71;
+}
+
+/* =================== CUERPO PRINCIPAL ================== */
+main {
+  background-color: #1C6EA4;
+  padding: 25px;
+  text-align: center;
+}
+
+/* =================== PIE DE PÁGINA ================== */
+footer {
+  background-color: #33A1E0;
+}
+footer div {
+  display: flex;
+  justify-content: center;
+  align-items: normal;
+  width: 50%;
+}
+footer a {
+  text-decoration: none;
+}
+footer p {
+  font-style: italic;
+}
+footer .imgpie {
+  width: 25px;
+  margin-right: 15px;
+}
+
+/* =================== TARJETAS Y TABLAS ================== */
+.card {
+  box-shadow: 0px 4px 30px rgb(0, 0, 0);
+}
+.card-img-top {
+  height: 180px;
+  object-fit: cover;
+}
+.card-text {
+  color: #154D71;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+table {
+  margin: 20px auto;
+}
+
+.sobremi {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+/* =================== INDEX ================== */
+.mimapa {
+  border-radius: 10px;
+}
+
+.migrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 20px;
+  column-gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  .migrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.itemgrid {
+  width: auto;
+  height: auto;
+  background-color: #087295;
+  padding: 50px;
+  margin: 15px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(1, 5, 100);
+}
+
+/* =================== BOTÓN HAMBURGUESA ================== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  background: #444;
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+}
+
+/* =================== RESPONSIVE ================== */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+    background: #444;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+  .menu.active {
+    display: flex;
+  }
+  .hamburger {
+    display: flex;
+    margin-left: 40px;
+  }
+}
+/* =================== ANIMACIONES ================== */
+.animazoom,
+.animabt {
+  transition: 1s;
+}
+.animazoom:hover,
+.animabt:hover {
+  transform: scale(1.4);
+}
+
+.animabt svg:hover {
+  fill: #f1910b;
+}
+
+#titulo {
+  animation-name: animacion;
+  animation-duration: 4s;
+  animation-iteration-count: 4;
+  animation-delay: 1s;
+}
+
+@keyframes animacion {
+  0% {
+    color: #FFF9AF;
+    transform: scale(1);
+  }
+  25% {
+    color: #d08f0d;
+    transform: scale(1.2);
+  }
+  50% {
+    color: #f1910b;
+    transform: scale(1);
+  }
+  75% {
+    color: #a1bc08;
+    transform: scale(0.8);
+  }
+  100% {
+    color: #FFF9AF;
+    transform: scale(1);
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

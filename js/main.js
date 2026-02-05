@@ -37,18 +37,26 @@ let articleContainer = document.getElementById("article-container")
 
 
 function renderizarArticulos(articlesArray) {
+    const row = document.createElement("div")
+    row.className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4"
+    articleContainer.appendChild(row)
     articlesArray.forEach(article => {
-        articleContainer.classList.add("row", "g-3")
         const card = document.createElement("div")
-        card.className = "card border-dark col-12 col-sm-6 col-md-4 mb-3 p-3 mb-2 bg-light text-dark"
-        card.innerHTML = `  
-                        <div class="card-body">
-                            <h3 class="card-header">${article.nombre}</h3>
-                            <h4 class="card-text">Precio: $${article.precio}</h4>
-                            <h4 class="card-text">Categoria: ${article.deporte}</h4>
-                            <button class="articleAdd btn btn-light" id="${article.id}">Agregar</button>
-                        </div>`
-                        articleContainer.appendChild(card)
+        card.className = "col"
+
+        card.innerHTML = `
+            <div class="card h-100 border-dark bg-light text-dark">
+                <div class="card-body d-flex flex-column justify-content-between text-center">
+                    <h3 class="card-header">${article.nombre}</h3>
+                    <h4 class="card-text">Precio: $${article.precio}</h4>
+                    <h4 class="card-text">Categoria: ${article.deporte}</h4>
+                    <button class="articleAdd btn btn-primary" id="${article.id}">
+                        Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+        `
+        row.appendChild(card)
     })
     agregarAlCarrito()
 }

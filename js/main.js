@@ -2,30 +2,35 @@ const productosDeportivos = [
     {
         id: 1, 
         nombre: "Pelota de fútbol",
+        url: "./media/A01.jpg",
         precio: 12000,
         deporte: "futbol" 
     },
     {
         id: 2,
         nombre: "Zapatillas running",
+        url: "./media/A02.jpg",
         precio: 180000,
         deporte: "running" 
     },
     {
         id: 3,
         nombre: "Raqueta de tenis",
+        url: "./media/A03.jpg",
         precio: 127000,
         deporte: "tenis" 
     },
     {
         id: 4,
         nombre: "Chaleco de Hidratación Noaflojes",
+        url: "./media/A04.jpg",
         precio: 120000,
         deporte: "running" 
     },
     {
         id: 5,
         nombre: "Mancuernas 10kg",
+        url: "./media/A05.jpg",
         precio: 48000,
         deporte: "fitness" 
     }
@@ -53,6 +58,7 @@ function renderizarArticulos(articlesArray) {
             <div class="card h-100 border-dark bg-light text-dark">
                 <div class="card-body d-flex flex-column justify-content-between text-center">
                     <h3 class="card-header">${article.nombre}</h3>
+                    <div class="text-center"><img src="${article.url}" class="card-img-top w-25" alt="${article.nombre}"></div>
                     <h4 class="card-text">Precio: $${article.precio}</h4>
                     <h4 class="card-text">Categoria: ${article.deporte}</h4>
                     <button class="articleAdd btn btn-primary" id="${article.id}">

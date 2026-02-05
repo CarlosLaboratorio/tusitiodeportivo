@@ -25,6 +25,7 @@ function renderizarCarrito(cardItems) {
             <div class="card h-100 border-dark bg-light text-dark">
                 <div class="card-body d-flex flex-column justify-content-between text-center">
                     <h3 class="card-header">${article.nombre}</h3>
+                    <div class="text-center"><img src=".${article.url}" class="card-img-top w-25" alt="${article.nombre}"></div>
                     <h4 class="card-text">Precio: $${article.precio}</h4>
                     <h4 class="card-text">Categoria: ${article.deporte}</h4>
                     <button class="articleRemove btn btn-secondary" data-id="${article.id}">

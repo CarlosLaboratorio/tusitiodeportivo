@@ -2,7 +2,7 @@ let cardArticles = JSON.parse(localStorage.getItem("cardArticles")) || []
 const cardCarrito = document.getElementById("card-carrito")
 const totalCarrito = document.getElementById("totalCarrito")
 
-// //mejorar para mantener el carrito actualizado al quitar un artículo.
+// mejorar para mantener el carrito actualizado al quitar un artículo.
 
 function renderizarCarrito(cardItems) {
     cardCarrito.innerHTML = ""

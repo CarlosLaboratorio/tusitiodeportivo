@@ -52,18 +52,39 @@ function agregarEventosEliminar() {
     removeButtons.forEach(button => {
         button.addEventListener("click", (e) => {
             const id = Number(e.currentTarget.dataset.id)
+            Swal.fire({
+                    title: "Eliminar producto",
+                    text: `Esta acción borra ${cardArticles.find(article => article.id === id)?.nombre || "el producto" } de tu carrito`,
+                    icon: "warning",
+                    confirmButtonColor: "#3085d6",
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, borrar",
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    const nombreProductoEliminado = cardArticles.find(article => article.id === id)?.nombre || "el producto"
 
-            cardArticles = cardArticles.filter(
-                article => article.id !== id
-            )
+                    cardArticles = cardArticles.filter(
+                        article => article.id !== id
+                    )
 
-            localStorage.setItem(
-                "cardArticles",
-                JSON.stringify(cardArticles)
-            )
 
-            renderizarCarrito(cardArticles)
-        })
+                    localStorage.setItem(
+                        "cardArticles",
+                        JSON.stringify(cardArticles)
+                    )
+
+                    renderizarCarrito(cardArticles)
+
+                    Swal.fire({
+                    title: "Producto borrado!",
+                    text: `Se borro ${nombreProductoEliminado} de tu carrito`,
+                    icon: "success"
+                    })
+                }
+                })
+            })
     })
 }
 

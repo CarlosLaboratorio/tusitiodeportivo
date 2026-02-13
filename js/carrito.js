@@ -70,9 +70,26 @@ function agregarEventosEliminar() {
 const btnVaciar = document.getElementById("vaciarCarrito")
 
 btnVaciar.addEventListener("click", () => {
-    cardArticles = []
-    localStorage.removeItem("cardArticles")
-    renderizarCarrito(cardArticles)
+    Swal.fire({
+            title: "Vaciar Carrito",
+            text: "Esta acción borra todos sus articulos elegidos",
+            icon: "warning",
+            confirmButtonColor: "#3085d6",
+            showCancelButton: true,
+            confirmButtonText: "Sí, vaciar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+    if (result.isConfirmed) {
+        cardArticles = []
+        localStorage.removeItem("cardArticles")
+        renderizarCarrito(cardArticles)
+        Swal.fire({
+        title: "Carrito Vacio!",
+        text: "Articulos borrados de tu carrito",
+        icon: "success"
+    });
+    }
+});
 })
 
 renderizarCarrito(cardArticles)

@@ -60,12 +60,12 @@ header nav a {
   text-decoration: none;
   color: white;
 }
-body a {
+.colortext{
   text-decoration: none;
-  color: #073e85;
+  color: #200202;
 }
-body a:hover {
-  color: #b36602;
+.colortext:hover {
+  color: #6e4003;
 }
 
 /* EFECTO IMAGEN */

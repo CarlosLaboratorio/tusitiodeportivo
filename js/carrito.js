@@ -123,37 +123,87 @@ btnVaciar.addEventListener("click", () => {
 });
 })
 
-btnComprar.addEventListener("click", () => {
+// btnComprar.addEventListener("click", () => {
+
+//     // if (cardArticles.length === 0) return
+
+//     Swal.fire({
+//         title: "Confirmar compra",
+//         text: "¿Desea finalizar la compra?",
+//         icon: "question",
+//         showCancelButton: true,
+//         confirmButtonText: "Sí, quiero comprar",
+//         cancelButtonText: "Cancelar"
+//     }).then((result) => {
+
+//         if (result.isConfirmed) {
+
+//             // Limpiar array
+//             cardArticles = []
+
+//             // Limpiar storage
+//             // localStorage.removeItem("cardArticles")
+//             localStorage.setItem("cardArticles", JSON.stringify(cardArticles))
+
+//             // Re-renderizar
+//             renderizarCarrito(cardArticles)
+
+//             Swal.fire({
+//                 title: "¡Gracias por tu compra!",
+//                 text: "Tu pedido fue procesado correctamente.",
+//                 icon: "success"
+//             })
+//         }
+//     })
+// })
+
+btnComprar.addEventListener("click", async () => {
 
     // if (cardArticles.length === 0) return
 
-    Swal.fire({
-        title: "Confirmar compra",
-        text: "¿Desea finalizar la compra?",
-        icon: "question",
+    const { value: formValues } = await Swal.fire({
+        title: "Finalizar Compra",
+        html: `
+            <input id="swal-nombre" class="swal2-input" placeholder="Nombre">
+            <input id="swal-email" type="email" class="swal2-input" placeholder="Email">
+        `,
+        focusConfirm: false,
         showCancelButton: true,
-        confirmButtonText: "Sí, quiero comprar",
-        cancelButtonText: "Cancelar"
-    }).then((result) => {
+        confirmButtonText: "Confirmar",
+        cancelButtonText: "Cancelar",
+        preConfirm: () => {
 
-        if (result.isConfirmed) {
+            const nombre = document.getElementById("swal-nombre").value
+            const email = document.getElementById("swal-email").value
 
-            // Limpiar array
-            cardArticles = []
+            if (!nombre || !email) {
+                Swal.showValidationMessage("Debe completar todos los campos")
+                return
+            }
 
-            // Limpiar storage
-            // localStorage.removeItem("cardArticles")
-            localStorage.setItem("cardArticles", JSON.stringify(cardArticles))
-
-            // Re-renderizar
-            renderizarCarrito(cardArticles)
-
-            Swal.fire({
-                title: "¡Gracias por tu compra!",
-                text: "Tu pedido fue procesado correctamente.",
-                icon: "success"
-            })
+            return { nombre, email }
         }
+    })
+
+    if (!formValues) return
+
+    // Calcular total
+    const total = cardArticles.reduce((acc, item) => acc + item.precio, 0)
+
+    // Limpiar carrito
+    cardArticles = []
+    localStorage.setItem("cardArticles", JSON.stringify(cardArticles))
+
+    renderizarCarrito(cardArticles)
+
+    await Swal.fire({
+        title: `¡Gracias ${formValues.nombre}! 🎉`,
+        html: `
+            <p>Compra realizada con éxito.</p>
+            <p>Total abonado: <strong>$${total}</strong></p>
+            <p>Confirmación enviada a: ${formValues.email}</p>
+        `,
+        icon: "success"
     })
 })
 

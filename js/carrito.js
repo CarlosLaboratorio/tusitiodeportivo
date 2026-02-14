@@ -89,6 +89,8 @@ function agregarEventosEliminar() {
                     Swal.fire({
                     title: "Producto borrado!",
                     text: `Se borro ${nombreProductoEliminado} de tu carrito`,
+                    showConfirmButton: false,
+                    timer: 2500,
                     icon: "success"
                     })
                 }
@@ -117,6 +119,8 @@ btnVaciar.addEventListener("click", () => {
         Swal.fire({
         title: "Carrito Vacio!",
         text: "Articulos borrados de tu carrito",
+        showConfirmButton: false,
+        timer: 2500,
         icon: "success"
     });
     }

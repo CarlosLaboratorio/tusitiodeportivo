@@ -123,40 +123,6 @@ btnVaciar.addEventListener("click", () => {
 });
 })
 
-// btnComprar.addEventListener("click", () => {
-
-//     // if (cardArticles.length === 0) return
-
-//     Swal.fire({
-//         title: "Confirmar compra",
-//         text: "¿Desea finalizar la compra?",
-//         icon: "question",
-//         showCancelButton: true,
-//         confirmButtonText: "Sí, quiero comprar",
-//         cancelButtonText: "Cancelar"
-//     }).then((result) => {
-
-//         if (result.isConfirmed) {
-
-//             // Limpiar array
-//             cardArticles = []
-
-//             // Limpiar storage
-//             // localStorage.removeItem("cardArticles")
-//             localStorage.setItem("cardArticles", JSON.stringify(cardArticles))
-
-//             // Re-renderizar
-//             renderizarCarrito(cardArticles)
-
-//             Swal.fire({
-//                 title: "¡Gracias por tu compra!",
-//                 text: "Tu pedido fue procesado correctamente.",
-//                 icon: "success"
-//             })
-//         }
-//     })
-// })
-
 btnComprar.addEventListener("click", async () => {
 
     // if (cardArticles.length === 0) return
@@ -165,7 +131,9 @@ btnComprar.addEventListener("click", async () => {
         title: "Finalizar Compra",
         html: `
             <input id="swal-nombre" class="swal2-input" placeholder="Nombre">
+            <input id="swal-apellido" class="swal2-input" placeholder="Apellido">
             <input id="swal-email" type="email" class="swal2-input" placeholder="Email">
+            <input id="swal-domicilio" class="swal2-input" placeholder="Domicilio">
         `,
         focusConfirm: false,
         showCancelButton: true,
@@ -174,9 +142,11 @@ btnComprar.addEventListener("click", async () => {
         preConfirm: () => {
 
             const nombre = document.getElementById("swal-nombre").value
+            const apellido = document.getElementById("swal-apellido").value
             const email = document.getElementById("swal-email").value
+            const domicilio = document.getElementById("swal-domicilio").value
 
-            if (!nombre || !email) {
+            if (!nombre || !apellido || !email || !domicilio) {
                 Swal.showValidationMessage("Debe completar todos los campos")
                 return
             }
@@ -199,9 +169,11 @@ btnComprar.addEventListener("click", async () => {
     await Swal.fire({
         title: `¡Gracias ${formValues.nombre}! 🎉`,
         html: `
-            <p>Compra realizada con éxito.</p>
-            <p>Total abonado: <strong>$${total}</strong></p>
-            <p>Confirmación enviada a: ${formValues.email}</p>
+            <p>Operación realizada con éxito.</p>
+            <p>Total a abonar: <strong>$${total}</strong></p>
+            <p>DATOS PARA TRANSFERENCIA</p>
+            <p>Alias: <strong>carlos.anibal.37</strong></p>
+            <p>Enlace de Confirmación y datos enviada a: ${formValues.email}</p>
         `,
         icon: "success"
     })

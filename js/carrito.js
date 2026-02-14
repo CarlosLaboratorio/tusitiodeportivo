@@ -123,4 +123,38 @@ btnVaciar.addEventListener("click", () => {
 });
 })
 
+btnComprar.addEventListener("click", () => {
+
+    // if (cardArticles.length === 0) return
+
+    Swal.fire({
+        title: "Confirmar compra",
+        text: "¿Desea finalizar la compra?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Sí, quiero comprar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            // Limpiar array
+            cardArticles = []
+
+            // Limpiar storage
+            // localStorage.removeItem("cardArticles")
+            localStorage.setItem("cardArticles", JSON.stringify(cardArticles))
+
+            // Re-renderizar
+            renderizarCarrito(cardArticles)
+
+            Swal.fire({
+                title: "¡Gracias por tu compra!",
+                text: "Tu pedido fue procesado correctamente.",
+                icon: "success"
+            })
+        }
+    })
+})
+
 renderizarCarrito(cardArticles)

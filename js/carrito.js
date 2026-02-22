@@ -67,11 +67,6 @@ function agregarEventosEliminar() {
                     
                     const nombreProductoEliminado = cardArticles.find(article => article.id === id)?.nombre || "el producto"
 
-                    // Cambiamos este código por el findIndex y splice para eliminar elemento por indice y que se mantengan otros productos de igual id
-                    // cardArticles = cardArticles.filter(
-                    //     article => article.id !== id
-                    // )
-
                     const index = cardArticles.findIndex(article => article.id === id)
 
                     if (index !== -1) {

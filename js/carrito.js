@@ -124,8 +124,7 @@ btnVaciar.addEventListener("click", () => {
 
 btnComprar.addEventListener("click", async () => {
 
-    // if (cardArticles.length === 0) return
-
+    
     const { value: formValues } = await Swal.fire({
         title: "Finalizar Compra",
         html: `

@@ -1,40 +1,4 @@
-const productosDeportivos = [
-    {
-        id: 1, 
-        nombre: "Pelota de fútbol",
-        url: "./media/A01.jpg",
-        precio: 12000,
-        deporte: "futbol" 
-    },
-    {
-        id: 2,
-        nombre: "Zapatillas running",
-        url: "./media/A02.jpg",
-        precio: 180000,
-        deporte: "running" 
-    },
-    {
-        id: 3,
-        nombre: "Raqueta de tenis",
-        url: "./media/A03.jpg",
-        precio: 127000,
-        deporte: "tenis" 
-    },
-    {
-        id: 4,
-        nombre: "Chaleco de Hidratación Noaflojes",
-        url: "./media/A04.jpg",
-        precio: 120000,
-        deporte: "running" 
-    },
-    {
-        id: 5,
-        nombre: "Mancuernas 10kg",
-        url: "./media/A05.jpg",
-        precio: 48000,
-        deporte: "fitness" 
-    }
-]
+let productos = []
 
 // Mejora para mantener el carrito actualizado al agregar un nuevo artículo. 
 
@@ -42,7 +6,17 @@ let cardArticle = JSON.parse(localStorage.getItem("cardArticles")) || []
 
 let articleContainer = document.getElementById("article-container")
 
-
+const URL = "./db/data.json"
+function obtenerProductos () {
+    fetch(URL)
+        .then(response => response.json())
+        .then(data => {
+            productos = data
+            renderizarArticulos(productos)
+        })
+        .catch((err)=>console.log("Hubo un error",err))
+        .finally(()=>console.log("Finalizo la peticion"))
+}
 
 function renderizarArticulos(articlesArray) {
     articleContainer.innerHTML = ""
@@ -73,15 +47,15 @@ function renderizarArticulos(articlesArray) {
     agregarAlCarrito()
 }
 
-renderizarArticulos(productosDeportivos)
+obtenerProductos()
 
 function agregarAlCarrito () {
     const addButtons = document.querySelectorAll(".articleAdd")
 
     addButtons.forEach(button => {
         button.addEventListener("click", (evento) => {
-            const articleId = evento.currentTarget.id
-            const selectedArticle = productosDeportivos.find(
+            const articleId = Number(evento.currentTarget.id)
+            const selectedArticle = productos.find(
                 article => article.id == articleId
             )
 

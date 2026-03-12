@@ -88,14 +88,20 @@ function agregarAlCarrito () {
             )
 
             Toastify({
-                text: `✔ ${selectedArticle.nombre} agregado al carrito`,
-                duration: 2000,
+                text: `🛒 ${selectedArticle.nombre} agregado 
+                <a href="./pages/carrito.html" style="color:white;font-weight:bold;margin-left:10px;text-decoration:underline;">
+                Ir al carrito
+                </a>`,
+                duration: 5000,
                 gravity: "bottom",
                 position: "right",
+                close: true,
+                escapeMarkup: false,
                 style: {
-                    background: "#2ecc71"
+                    background: "linear-gradient(to right, #00b09b, #96c93d)"
                 }
             }).showToast();
+
         })
     })
 }

@@ -65,13 +65,16 @@ function agregarAlCarrito () {
                 "cardArticles",
                 JSON.stringify(cardArticle)
             )
-            Swal.fire({
-                title: "Agregado",
-                text: `Producto ${selectedArticle.nombre} agregado con exito`,
-                showConfirmButton: false,
-                timer: 2000,
-                icon: "success"
-            });
+
+            Toastify({
+                text: `✔ ${selectedArticle.nombre} agregado al carrito`,
+                duration: 2000,
+                gravity: "bottom",
+                position: "right",
+                style: {
+                    background: "#2ecc71"
+                }
+            }).showToast();
         })
     })
 }

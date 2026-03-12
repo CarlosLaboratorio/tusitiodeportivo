@@ -2,91 +2,91 @@
     {
         "id": 1, 
         "nombre": "Pelota de fútbol",
-        "url": "./media/A01.jpg",
+        "url": "./assets/A01.jpg",
         "precio": 12000,
         "deporte": "futbol" 
     },
     {
         "id": 2,
         "nombre": "Zapatillas running",
-        "url": "./media/A02.jpg",
+        "url": "./assets/A02.jpg",
         "precio": 180000,
         "deporte": "running" 
     },
     {
         "id": 3,
         "nombre": "Raqueta de tenis",
-        "url": "./media/A03.jpg",
+        "url": "./assets/A03.jpg",
         "precio": 127000,
         "deporte": "tenis" 
     },
     {
         "id": 4,
         "nombre": "Chaleco de Hidratación Noaflojes",
-        "url": "./media/A04.jpg",
+        "url": "./assets/A04.jpg",
         "precio": 120000,
         "deporte": "running" 
     },
     {
         "id": 5,
         "nombre": "Mancuernas 10kg",
-        "url": "./media/A05.jpg",
+        "url": "./assets/A05.jpg",
         "precio": 48000,
         "deporte": "fitness" 
     },
     {
         "id": 6,
         "nombre": "Short Deportivo Dragon",
-        "url": "./media/A06.jpg",
+        "url": "./assets/A06.jpg",
         "precio": 25000,
         "deporte": "running" 
     },
     {
         "id": 7,
         "nombre": "Riñonera Azul Gadnic Resistente Al Agua",
-        "url": "./media/A07.jpg",
+        "url": "./assets/A07.jpg",
         "precio": 14999,
         "deporte": "running" 
     },
     {
         "id": 8,
         "nombre": "Camiseta Alternativa Selección Argentina 2006",
-        "url": "./media/A08.jpg",
+        "url": "./assets/A08.jpg",
         "precio": 199999,
         "deporte": "futbol" 
     },
     {
         "id": 9,
         "nombre": "Guantes arquero match Nike",
-        "url": "./media/A09.jpg",
+        "url": "./assets/A09.jpg",
         "precio": 79999,
         "deporte": "futbol" 
     },
     {
         "id": 10,
         "nombre": "Rueda Abdominales Gadnic Fit Ancha",
-        "url": "./media/A10.jpg",
+        "url": "./assets/A10.jpg",
         "precio": 16599,
         "deporte": "fitness" 
     },
     {
         "id": 11,
         "nombre": "Kit Entrenamiento Fitness Casa Eco",
-        "url": "./media/A11.jpg",
+        "url": "./assets/A11.jpg",
         "precio": 25990,
         "deporte": "fitness" 
     },
     {
         "id": 12,
         "nombre": "Pelotas de tenis tubo x3 Penn",
-        "url": "./media/A12.jpg",
+        "url": "./assets/A12.jpg",
         "precio": 9500,
         "deporte": "tenis" 
     },
     {
         "id": 13,
         "nombre": "Kit De Entrenamiento Tenis Con Base + cuerda Elástica",
-        "url": "./media/A13.jpg",
+        "url": "./assets/A13.jpg",
         "precio": 11800,
         "deporte": "tenis" 
     }

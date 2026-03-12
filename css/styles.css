@@ -24,7 +24,7 @@ body {
 
 /* =================== ENCABEZADO ================== */
 header {
-  background-image: url("../media/banner-deportivo.png");
+  background-image: url("../assets/banner-deportivo.png");
   background-size: 75%;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,21 +1,42 @@
 let productos = []
 
+let cardArticle
 // Mejora para mantener el carrito actualizado al agregar un nuevo artículo. 
+try {
+    cardArticle = JSON.parse(localStorage.getItem("cardArticles")) || []
+}
+catch {
+    cardArticle = []
+}
 
-let cardArticle = JSON.parse(localStorage.getItem("cardArticles")) || []
 
 let articleContainer = document.getElementById("article-container")
 
 const URL = "./db/data.json"
-function obtenerProductos () {
-    fetch(URL)
-        .then(response => response.json())
-        .then(data => {
-            productos = data
-            renderizarArticulos(productos)
-        })
-        .catch((err)=>console.log("Hubo un error",err))
-        .finally(()=>console.log("Finalizo la peticion"))
+
+async function obtenerProductos () {
+    try {
+        const response = await fetch(URL)
+        if (!response.ok) {
+            throw new Error ("No se pudieron cargar los productos.")
+        }
+        const data = await response.json()
+        productos = data
+        renderizarArticulos(productos)
+    } catch (error) {
+        Toastify({
+            text: "Hubo un problema al cargar los productos, intente más tarde...",
+            duration: 4000,
+            gravity: "top",
+            position: "right",
+            style: {
+                background: "#e74c3c"
+            }
+        }).showToast()
+    } finally {
+
+    }
+
 }
 
 function renderizarArticulos(articlesArray) {

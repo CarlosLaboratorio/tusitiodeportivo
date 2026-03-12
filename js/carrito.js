@@ -2,8 +2,11 @@ let cardArticles = JSON.parse(localStorage.getItem("cardArticles")) || []
 const cardCarrito = document.getElementById("card-carrito")
 const totalCarrito = document.getElementById("totalCarrito")
 
-// mejorar para mantener el carrito actualizado al quitar un artículo.
+const listaProductos = cardArticles.map(
+    p => `<li>${p.nombre} - $${p.precio}</li>`
+).join("")
 
+// mejorar para mantener el carrito actualizado al quitar un artículo.
 function renderizarCarrito(cardItems) {
     cardCarrito.innerHTML = ""
 
@@ -139,13 +142,33 @@ btnComprar.addEventListener("click", async () => {
         cancelButtonText: "Cancelar",
         preConfirm: () => {
 
-            const nombre = document.getElementById("swal-nombre").value
-            const apellido = document.getElementById("swal-apellido").value
-            const email = document.getElementById("swal-email").value
-            const domicilio = document.getElementById("swal-domicilio").value
+            //Validamos datos usando trim para evitar espacios vacíos y regex para validar formatos.
+            const nombre = document.getElementById("swal-nombre").value.trim()
+            const apellido = document.getElementById("swal-apellido").value.trim()
+            const email = document.getElementById("swal-email").value.trim()
+            const domicilio = document.getElementById("swal-domicilio").value.trim()
+
+            // Validación de campos con regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            const textoRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/
 
             if (!nombre || !apellido || !email || !domicilio) {
-                Swal.showValidationMessage("Debe completar todos los campos")
+                Swal.showValidationMessage("⚠ Debe completar todos los campos")
+                return
+            }
+
+            if (!textoRegex.test(nombre) || !textoRegex.test(apellido)) {
+                Swal.showValidationMessage("Nombre y apellido solo deben contener letras")
+                return
+            }
+
+            if (!emailRegex.test(email)) {
+                Swal.showValidationMessage("⚠ Ingrese un email válido")
+                return
+            }
+
+            if (domicilio.length < 5) {
+                Swal.showValidationMessage("Ingrese un domicilio válido")
                 return
             }
 
@@ -157,10 +180,14 @@ btnComprar.addEventListener("click", async () => {
 
     // Calcular total
     const total = cardArticles.reduce((acc, item) => acc + item.precio, 0)
-
+    
     // Limpiar carrito
-    cardArticles = []
-    localStorage.setItem("cardArticles", JSON.stringify(cardArticles))
+    try {
+        cardArticles = []
+        localStorage.setItem("cardArticles", JSON.stringify(cardArticles)) 
+    } catch {
+        Swal.fire("Error al procesar la compra")
+    }
 
     renderizarCarrito(cardArticles)
 
@@ -168,10 +195,13 @@ btnComprar.addEventListener("click", async () => {
         title: `¡Gracias ${formValues.nombre}! 🎉`,
         html: `
             <p>Operación realizada con éxito.</p>
-            <p>Total a abonar: <strong>$${total}</strong></p>
-            <p>DATOS PARA TRANSFERENCIA</p>
-            <p>Alias: <strong>carlos.anibal.37</strong></p>
-            <p>Enlace de Confirmación y datos enviada a: ${formValues.email}</p>
+            <p>Total: <strong>$${total}</strong></p>
+            <p>RESUMEN DE COMPRA</p>
+            <ul style="text-align:left">
+                ${listaProductos}
+            </ul>
+            <p><b>Total:</b> $${total}</p>
+            <p><b>Email:</b> ${formValues.email}</p>
         `,
         icon: "success"
     })

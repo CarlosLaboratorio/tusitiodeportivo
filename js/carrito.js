@@ -2,33 +2,30 @@ let cardArticles = JSON.parse(localStorage.getItem("cardArticles")) || []
 const cardCarrito = document.getElementById("card-carrito")
 const totalCarrito = document.getElementById("totalCarrito")
 
-// Se agrupan los productos por id para mostrar la cantidad en el resumen de compra.
-const productosAgrupados = cardArticles.reduce((acc, producto) => {
+// Sección donde obtenemos las formas de pago desde un nuevo json para mostrar en el resumen de compra despues.
+let formasPago = []
 
-    if (acc[producto.id]) {
-        acc[producto.id].cantidad++
-    } else {
-        acc[producto.id] = {
-            nombre: producto.nombre,
-            precio: producto.precio,
-            cantidad: 1
-        }
+async function obtenerFormasPago() {
+
+    try {
+
+        const response = await fetch("../db/formasPago.json")
+        const data = await response.json()
+
+        formasPago = data
+
+    } catch {
+
+        Toastify({
+            text: "No se pudieron cargar las formas de pago",
+            duration: 3000
+        }).showToast()
+
     }
 
-    return acc
+}
 
-}, {})
-
-//Se mapea para la lista de productos para mostrar en el resumen de compra.
-const listaProductos = Object.values(productosAgrupados)
-.map(p => `
-    <li>
-        ${p.nombre} x${p.cantidad} 
-        ($${p.precio} c/u) 
-        = $${p.precio * p.cantidad}
-    </li>
-`)
-.join("")
+obtenerFormasPago()
 
 // mejorar para mantener el carrito actualizado al quitar un artículo.
 function renderizarCarrito(cardItems) {
@@ -149,6 +146,26 @@ btnVaciar.addEventListener("click", () => {
 });
 })
 
+function generarOpcionesPago() {
+
+    return formasPago.map(pago => {
+
+        let texto = pago.nombre
+
+        if (pago.cuotas > 1) {
+            texto += ` ${pago.cuotas} cuotas`
+        }
+
+        if (pago.tasa > 0) {
+            texto += ` (+${pago.tasa}%)`
+        }
+
+        return `<option value="${pago.codigo}">${texto}</option>`
+
+    }).join("")
+
+}
+
 btnComprar.addEventListener("click", async () => {
 
     
@@ -158,7 +175,12 @@ btnComprar.addEventListener("click", async () => {
             <input id="swal-nombre" class="swal2-input" placeholder="Nombre">
             <input id="swal-apellido" class="swal2-input" placeholder="Apellido">
             <input id="swal-email" type="email" class="swal2-input" placeholder="Email">
+            <input id="swal-telefono" class="swal2-input" placeholder="Teléfono">
             <input id="swal-domicilio" class="swal2-input" placeholder="Domicilio">
+            <select id="swal-pago" class="swal2-input">
+            ${generarOpcionesPago()}
+            </select>
+
         `,
         focusConfirm: false,
         showCancelButton: true,
@@ -171,13 +193,21 @@ btnComprar.addEventListener("click", async () => {
             const apellido = document.getElementById("swal-apellido").value.trim()
             const email = document.getElementById("swal-email").value.trim()
             const domicilio = document.getElementById("swal-domicilio").value.trim()
+            const telefono = document.getElementById("swal-telefono").value.trim()
+            const pago = document.getElementById("swal-pago").value.trim()
 
             // Validación de campos con regex
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
             const textoRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/
+            const telefonoRegex = /^\d{7,15}$/
 
-            if (!nombre || !apellido || !email || !domicilio) {
+            if (!nombre || !apellido || !email || !domicilio || !telefono || !pago) {
                 Swal.showValidationMessage("⚠ Debe completar todos los campos")
+                return
+            }
+
+            if (!telefonoRegex.test(telefono)) {
+                Swal.showValidationMessage("⚠ Ingrese un teléfono válido")
                 return
             }
 
@@ -196,11 +226,15 @@ btnComprar.addEventListener("click", async () => {
                 return
             }
 
-            return { nombre, email }
+            return { nombre, email, pago }
         }
     })
 
     if (!formValues) return
+    
+    const formaSeleccionada = formasPago.find(
+    f => f.codigo === formValues.pago
+)
 
     // Calcular total
     const total = cardArticles.reduce((acc, item) => acc + item.precio, 0)
@@ -226,9 +260,39 @@ btnComprar.addEventListener("click", async () => {
             </ul>
             <p><b>Total:</b> $${total}</p>
             <p><b>Email:</b> ${formValues.email}</p>
+            <p><b>Forma de pago:</b> ${formaSeleccionada.nombre || "No especificada"}</p>
+            <p><b>Datos de pago:</b> ${formaSeleccionada.detalles || "No especificado"}</p>
         `,
         icon: "success"
     })
 })
+
+// Se agrupan los productos por id para mostrar la cantidad en el resumen de compra.
+const productosAgrupados = cardArticles.reduce((acc, producto) => {
+
+        if (acc[producto.id]) {
+            acc[producto.id].cantidad++
+        } else {
+            acc[producto.id] = {
+                nombre: producto.nombre,
+                precio: producto.precio,
+                cantidad: 1
+            }
+    }
+
+        return acc
+
+    }, {})
+
+//Se mapea para la lista de productos para mostrar en el resumen de compra.
+const listaProductos = Object.values(productosAgrupados)
+    .map(p => `
+        <li>
+            ${p.nombre} x${p.cantidad} 
+            ($${p.precio} c/u) 
+            = $${p.precio * p.cantidad}
+        </li>
+    `)
+    .join("")
 
 renderizarCarrito(cardArticles)

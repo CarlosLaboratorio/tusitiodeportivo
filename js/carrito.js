@@ -2,9 +2,33 @@ let cardArticles = JSON.parse(localStorage.getItem("cardArticles")) || []
 const cardCarrito = document.getElementById("card-carrito")
 const totalCarrito = document.getElementById("totalCarrito")
 
-const listaProductos = cardArticles.map(
-    p => `<li>${p.nombre} - $${p.precio}</li>`
-).join("")
+// Se agrupan los productos por id para mostrar la cantidad en el resumen de compra.
+const productosAgrupados = cardArticles.reduce((acc, producto) => {
+
+    if (acc[producto.id]) {
+        acc[producto.id].cantidad++
+    } else {
+        acc[producto.id] = {
+            nombre: producto.nombre,
+            precio: producto.precio,
+            cantidad: 1
+        }
+    }
+
+    return acc
+
+}, {})
+
+//Se mapea para la lista de productos para mostrar en el resumen de compra.
+const listaProductos = Object.values(productosAgrupados)
+.map(p => `
+    <li>
+        ${p.nombre} x${p.cantidad} 
+        ($${p.precio} c/u) 
+        = $${p.precio * p.cantidad}
+    </li>
+`)
+.join("")
 
 // mejorar para mantener el carrito actualizado al quitar un artículo.
 function renderizarCarrito(cardItems) {

@@ -4,6 +4,13 @@
 
 <h3 align="center">Este proyecto inicia como una innovadora tienda deportiva que irá escalando poco a poco, y en el futuro, llegar a hacer combos con descuentos exclusivos, ademas que estará pensado para que el cliente tenga un historial útil para analizar sus gastos. Actualmente, se incorpora dos html estáticos, dos js, imagenes en assets, un archivo de estilos propio, se usa bootstrap pensados para dar un minimo de estilos al simulador, sweetAlert para avisos importantes y toastify para agregado de carrito, errores, entre otros. La aplicación está basada en la manipulación del DOM, el uso de eventos, estructuras de datos, funciones de orden superior (forEach, find, reduce, map) y almacenamiento local, manteniendo separada la estructura HTML de la lógica JavaScript. En la etapa final, se actualizo y definio las tareas más especificas, se uso fetch, try y catch para gestion de errores, accesos al carrito y se usa json para las bases de datos. </h3>
 
+Fuentes Validación de datos:
+*[Usar expresiones regulares en JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_expressions)
+*[Validaciones de entradas como email](https://developer.mozilla.org/es/docs/Web/HTML/Reference/Elements/input/email)
+*[Validaciones de texto-números](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Character_classes)
+
+Documentación MarkDown: https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet
+
 <h3 align="center">A passionate frontend developer from Argentina</h3>
 
 - 🔭 I’m currently working how **Professor of Computing**
